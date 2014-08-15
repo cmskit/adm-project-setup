@@ -1,0 +1,12 @@
+# disable directory browsing
+Options All -Indexes
+
+# allow accessing these Files (case-insensitive)
+<FilesMatch "(?i)\.(ico|pdf|flv|jpe?g|mp3|mpg|mp4|mov|wav|wmv|png|gif|swf|css|js)$">
+Allow from All
+</FilesMatch>
+
+# prevent accessing these Files
+<FilesMatch "(?i)\.(htaccess|htpasswd|php|pl|py|jsp|asp|shtml|sh|cgi)$">
+Deny from All
+</FilesMatch>
