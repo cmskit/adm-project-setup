@@ -1,6 +1,6 @@
 {
-    "name": "cms-kit admin wizard project setup",
-    "type": "library",
+    "name": "cmskit/admin-project-setup-wizard",
+    "type": "cmskit-adminwizard",
     "version": "0.6.0",
     "description": "This wizard lets you create new projects or upload existing ones",
     "license": "GPL",
@@ -11,9 +11,15 @@
         }
     ],
     "homepage": "http://cms-kit.com",
-
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/cmskit/installers"
+        }
+    ],
     "require": {
         "php": ">=5.3.3",
-        "cmskit/lib-jquery-ui": "dev-master"
+        "composer/installers": "dev-bugfix",
+        "cmskit/jquery-ui": "dev-master"
     }
 }
