@@ -11,15 +11,8 @@
         }
     ],
     "homepage": "http://cms-kit.com",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/cmskit/installers"
-        }
-    ],
     "require": {
         "php": ">=5.3.3",
-        "composer/installers": "dev-bugfix",
         "cmskit/jquery-ui": "dev-master"
     }
 }
