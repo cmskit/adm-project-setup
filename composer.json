@@ -1,5 +1,5 @@
 {
-    "name": "cmskit/admin-project-setup-wizard",
+    "name": "cmskit/admin-project-setup",
     "type": "library",
     "version": "0.6.0",
     "description": "This wizard lets you create new projects or upload existing ones",
