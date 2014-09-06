@@ -2,7 +2,7 @@
 
 This wizard lets you create new projects or upload existing ones.
 
-Installation path: backend/admin/_project_setup
+Installation path: backend/admin/project_setup
 
 ## Installation
 
@@ -12,4 +12,6 @@ Installation path: backend/admin/_project_setup
 
 ### Installation via package management
 
-tbd
+command line
+
+    "cmskit/admin-project-setup": "dev-master"

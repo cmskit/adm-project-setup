@@ -1,7 +1,7 @@
 <?php
 
 require 'inc/htaccess.php';
-require('../../../vendor/cmskit/lib-pclzip/pclzip.lib.php');
+require('../../../vendor/pclzip/pclzip/pclzip.lib.php');
 
 mkdir($projectPath);
 chmod($projectPath, 0777);
@@ -11,49 +11,49 @@ $html = '';
 // fix some access-problems of pclzip
 function preExtractCallBack($p_event, &$p_header)
 {
-	$info = pathinfo($p_header['filename']);
-	if(!isset($info['extension']))// folders are created here
-	{
-		$d = $info['dirname'].'/'.$info['filename'];
-		mkdir($d);
-		chmod($d, 0777);
-		return 0;
-	}
-	else// files are simply extracted, 
-	{
-		return 1;
-	}
+    $info = pathinfo($p_header['filename']);
+    if(!isset($info['extension']))// folders are created here
+    {
+        $d = $info['dirname'].'/'.$info['filename'];
+        mkdir($d);
+        chmod($d, 0777);
+        return 0;
+    }
+    else// files are simply extracted, 
+    {
+        return 1;
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 // if we detect a uploaded project (zip-file), we use this
 if(
-	$_FILES['file'] && 
-	$_FILES['file']['name'] && 
-	array_pop(explode('.', strval($_FILES['file']['name']))) == 'zip'
+    $_FILES['file'] && 
+    $_FILES['file']['name'] && 
+    array_pop(explode('.', strval($_FILES['file']['name']))) == 'zip'
   )
 {
-	$tname = substr($_FILES['file']['name'], 0, -4);
-	$zipPath = $_FILES['file']['tmp_name'];
+    $tname = substr($_FILES['file']['name'], 0, -4);
+    $zipPath = $_FILES['file']['tmp_name'];
 }
 else // we use the empty dummy-project
 {
-	$tname = 'dummy';
-	$zipPath = 'dummy.zip';
+    $tname = 'dummy';
+    $zipPath = 'dummy.zip';
 }
 
 // we try to extract the ZIP
 $archive = new PclZip($zipPath);
-if ($archive->extract(	PCLZIP_OPT_PATH, $projectPath,
-						PCLZIP_OPT_REMOVE_PATH, $tname,
-						PCLZIP_CB_PRE_EXTRACT, 'preExtractCallBack',
-						PCLZIP_OPT_SET_CHMOD, 0777
-					) == 0)
+if ($archive->extract(  PCLZIP_OPT_PATH, $projectPath,
+                        PCLZIP_OPT_REMOVE_PATH, $tname,
+                        PCLZIP_CB_PRE_EXTRACT, 'preExtractCallBack',
+                        PCLZIP_OPT_SET_CHMOD, 0777
+                    ) == 0)
 {
-	exit('Unrecoverable error "' . $archive->errorName(true) . '"');
+    exit('Unrecoverable error "' . $archive->errorName(true) . '"');
 }
-		
+        
 // create code for __configuration.php
 $config = '<?php
 /**
@@ -66,16 +66,17 @@ $config = '<?php
 namespace '.$_POST['wished_name'].';
 final class Configuration
 {
-	const BUILD 				= \''.$KITVERSION.'\';
-	const CRDATE 				= \''.date(DATE_RFC822).'\';
+    const BUILD                 = \''.$KITVERSION.'\';
+    const CRDATE                = \''.date(DATE_RFC822).'\';
+    const SECRET                = \''.md5(mt_rand()).'\';
 
-	public static $DB_ALIAS		= array(\''.implode("','", $_POST['dbalias']).'\');
-	public static $DB_TYPE 		= array(\''.implode("','", $_POST['dbtype']).'\');
-	public static $DB_HOST 		= array(\''.implode("','", $_POST['dbhost']).'\');
-	public static $DB_DATABASE 	= array(\''.implode("','", $_POST['dbname']).'\');
-	public static $DB_PORT 		= array(\''.implode("','", $_POST['dbport']).'\');
-	public static $DB_USER 		= array(\''.implode("','", $_POST['dbuser']).'\');
-	public static $DB_PASSWORD 	= array(\''.implode("','", $_POST['dbpass']).'\');
+    public static $DB_ALIAS     = array(\''.implode("','", $_POST['dbalias']).'\');
+    public static $DB_TYPE      = array(\''.implode("','", $_POST['dbtype']).'\');
+    public static $DB_HOST      = array(\''.implode("','", $_POST['dbhost']).'\');
+    public static $DB_DATABASE  = array(\''.implode("','", $_POST['dbname']).'\');
+    public static $DB_PORT      = array(\''.implode("','", $_POST['dbport']).'\');
+    public static $DB_USER      = array(\''.implode("','", $_POST['dbuser']).'\');
+    public static $DB_PASSWORD  = array(\''.implode("','", $_POST['dbpass']).'\');
 }
 ?>
 ';
@@ -105,24 +106,24 @@ $html .= '<form id="frm">
 $we_have_some_sqlites = false;
 for ($i = 0; $i < count($_POST['dbtype']); $i++)
 {
-	$html .= '<p>' . $_POST['dbalias'][$i];
-	
-	if($_POST['dbtype'][$i] == 'sqlite' && !file_exists($projectPath.'/objects/'.$_POST['dbname'][$i]))
-	{
-		$we_have_some_sqlites = true;
-		
-		$html .= ' <button type="button" onclick="prompt(\''.L('copy_Database_Path').'\',\''.
-					addslashes(realpath($projectPath.'/objects').DIRECTORY_SEPARATOR.$_POST['dbname'][$i]).
-					'\')">'.L('copy_Database_Path').'</button>	' . 
-					hlp('sqliteDbPath') . '<hr />';
-		
-	}
-	if($_POST['dbtype'][$i] == 'mysql')
-	{
-		$html .= ' <button type="button" onclick="prompt(\''.L('copy_Database_Credentials').'\',\'Name: '.$_POST['dbname'][$i].'/Password: '.$_POST['dbpass'][$i].'\')">'.L('copy_Database_Credentials').'</button>';
-	}
-	
-	$html .= '</p>';
+    $html .= '<p>' . $_POST['dbalias'][$i];
+    
+    if($_POST['dbtype'][$i] == 'sqlite' && !file_exists($projectPath.'/objects/'.$_POST['dbname'][$i]))
+    {
+        $we_have_some_sqlites = true;
+        
+        $html .= ' <button type="button" onclick="prompt(\''.L('copy_Database_Path').'\',\''.
+                    addslashes(realpath($projectPath.'/objects').DIRECTORY_SEPARATOR.$_POST['dbname'][$i]).
+                    '\')">'.L('copy_Database_Path').'</button>  ' . 
+                    hlp('sqliteDbPath') . '<hr />';
+        
+    }
+    if($_POST['dbtype'][$i] == 'mysql')
+    {
+        $html .= ' <button type="button" onclick="prompt(\''.L('copy_Database_Credentials').'\',\'Name: '.$_POST['dbname'][$i].'/Password: '.$_POST['dbpass'][$i].'\')">'.L('copy_Database_Credentials').'</button>';
+    }
+    
+    $html .= '</p>';
 }
 
 $html .= '

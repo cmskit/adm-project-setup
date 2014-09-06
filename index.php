@@ -12,8 +12,7 @@
 *
 *  The GNU General Public License can be found at
 *  http://www.gnu.org/licenses/gpl.html
-*  A copy is found in the textfile GPL.txt and important notices to other licenses
-*  can be found found in LICENSES.txt distributed with these scripts.
+
 *
 *  This script is distributed in the hope that it will be useful,
 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -67,7 +66,7 @@ function hlp($what, $float=true)
 <title>Create a new project</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
-<script type="text/javascript" src="../../../vendor/cmskit/lib-jquery-ui/jquery.min.js"></script>
+<script type="text/javascript" src="../../../vendor/cmskit/jquery-ui/jquery.min.js"></script>
 
 <link rel="stylesheet" type="text/css" href="inc/css/styles.css" />
 <script type="text/javascript" src="inc/js/functions.js"></script>
