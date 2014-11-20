@@ -30,7 +30,7 @@
 $backend = '../../';
 require $backend.'inc/php/session.php';
 require $backend.'inc/php/functions.php';
-require $backend.'inc/super.php';
+require $backend.'inc/global_configuration.php';
 
 /**
  * looking for language files in login
