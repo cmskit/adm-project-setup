@@ -49,6 +49,13 @@ if (!file_exists($backend.'../projects'))
 	file_put_contents($backend.'../projects/index.html', '');
 }
 
+/**
+ *
+ */
+function L($str)
+{
+	return str_replace('_', ' ', $str);
+}
 
 // Tooltip-Labels used in Step 3 / 4 below
 function hlp($what, $float=true)
