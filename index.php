@@ -54,7 +54,13 @@ if (!file_exists($backend.'../projects'))
  */
 function L($str)
 {
-	return str_replace('_', ' ', $str);
+
+	global $LL;
+	if(isset($LL[$str])) {
+		return $LL[$str];
+	} else {
+		return str_replace('_', ' ', $str);
+	}
 }
 
 // Tooltip-Labels used in Step 3 / 4 below
