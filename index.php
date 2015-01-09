@@ -40,7 +40,10 @@ $lang = browserLang( glob('locales/*.php') );
 $LL = array();
 @include 'locales/'.$lang.'.php';
 
-// create the project-directory if not exists
+
+/**
+ * create the project-directory if it does not exists
+ */
 if (!file_exists($backend.'../projects'))
 {
 	if(!is_writable($backend.'../')) exit('could not create projects because main-directory is not writable');
@@ -51,7 +54,9 @@ if (!file_exists($backend.'../projects'))
 }
 
 /**
- *
+ * Language translator (needed here, because we don't include inc/php/header.php)
+ * @param $str
+ * @return mixed
  */
 function L($str)
 {
@@ -64,7 +69,12 @@ function L($str)
 	}
 }
 
-// Tooltip-Labels used in Step 3 / 4 below
+/**
+ * Tooltip-Labels used in Step 3 / 4 below
+ * @param $what
+ * @param bool $float
+ * @return string
+ */
 function hlp($what, $float=true)
 {
 	global $LL;
@@ -81,7 +91,6 @@ function hlp($what, $float=true)
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1" />
 <script type="text/javascript" src="../../../vendor/cmskit/jquery-ui/jquery.min.js"></script>
-
 <link rel="stylesheet" type="text/css" href="inc/css/styles.css" />
 <script type="text/javascript" src="inc/js/functions.js"></script>
 

@@ -95,9 +95,9 @@ $_SESSION[$_POST['wished_name']]['lang'] = $lang;//browserLang(array('de','en'),
 
 $html .= '<form id="frm">
 <fieldset><legend>(4) "'.$_POST['wished_name'].'" '.L('created').'</legend>
-<a target="_blank" href="../modeling/index.php?project='.$_POST['wished_name'].'">'.L('goto_Data_Modeling').' &rArr;</a>
+<a target="_blank" href="../database_modeling/index.php?project='.$_POST['wished_name'].'">'.L('goto_Data_Modeling').' &rArr;</a>
 <hr />
-<a target="_blank" href="../db_admin/index.php?project='.$_POST['wished_name'].'">'.L('goto_DB_Admin').' &rArr;</a>
+<a target="_blank" href="../database_adminer/index.php?project='.$_POST['wished_name'].'">'.L('goto_DB_Admin').' &rArr;</a>
 <hr />
 <a target="_blank" href="../../index.php?project='.$_POST['wished_name'].'">'.L('goto_Login_Page').' &rArr;</a>
 <hr />
