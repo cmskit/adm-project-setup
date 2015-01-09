@@ -45,8 +45,9 @@ if (!file_exists($backend.'../projects'))
 {
 	if(!is_writable($backend.'../')) exit('could not create projects because main-directory is not writable');
 	mkdir($backend.'../projects');
-	chmod($backend.'../projects', 0776);
+	chmod($backend.'../projects', 0777);
 	file_put_contents($backend.'../projects/index.html', '');
+	chmod($backend.'../projects/index.html', 0777);
 }
 
 /**
