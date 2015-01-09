@@ -38,10 +38,10 @@ function createDatabase($type, $name, $user='newuser', $pass='', $host='localhos
                     CREATE USER '$user'@'localhost' IDENTIFIED BY '$pass';
                     GRANT ALL ON `$name`.* TO '$user'@'localhost';
                     FLUSH PRIVILEGES;")
-                or $errors = print_r($dbh->errorInfo(), true) . "\n";
+                or $errors .= print_r($dbh->errorInfo(), true) . "\n";
 
             } catch (PDOException $e) {
-                $errors = 'Database ERROR: ' . $e->getMessage() . "\n";
+                $errors .= 'Database ERROR: ' . $e->getMessage() . "\n";
             }
         break;
 
@@ -56,7 +56,7 @@ function createDatabase($type, $name, $user='newuser', $pass='', $host='localhos
             chmod($db_path, 0777);
 
             if(!file_exists($db_path)) {
-                $errors = 'could not create SQLite Database ' . $name . "\n";
+                $errors .= 'could not create SQLite Database ' . $name . "\n";
             }
         break;
 
