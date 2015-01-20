@@ -106,7 +106,7 @@ else // we use the empty dummy-project
     $tname = 'dummy';
     $zipPath = 'dummy.zip';
 }
-
+$error = '';
 // we try to extract the ZIP
 $archive = new PclZip($zipPath);
 if ($archive->extract(  PCLZIP_OPT_PATH, $projectPath,
@@ -115,26 +115,30 @@ if ($archive->extract(  PCLZIP_OPT_PATH, $projectPath,
                         PCLZIP_OPT_SET_CHMOD, 0777
                     ) == 0)
 {
-    exit('Unrecoverable error "' . $archive->errorName(true) . '"');
+    $error .= 'Unrecoverable error "' . $archive->errorName(true) . '"';
 } else {
     $c = 0;
     $we_have_some_sqlites = false;
 
-    $error = '';
     foreach($_POST['dbtype'] as $type) {
 
         // we need to protect SQLite-DB-files from direct access (.htaccess)
-        if($type=='sqlite') $we_have_some_sqlites = true;
+        if($type=='sqlite') {
+            $we_have_some_sqlites = true;
+        }
 
-        $error .= createDatabase(
-            $type,
-            $_POST['dbname'][$c],
-            $_POST['dbuser'][$c],
-            $_POST['dbpass'][$c],
-            $_POST['dbhost'][$c],
-            $_POST['dbrootname'][$c],
-             $_POST['dbrootpass'][$c]
-        );
+        if(empty($_POST['dbexists'][$c])) {
+            $error .= createDatabase(
+                $type,
+                $_POST['dbname'][$c],
+                $_POST['dbuser'][$c],
+                $_POST['dbpass'][$c],
+                $_POST['dbhost'][$c],
+                $_POST['dbrootname'][$c],
+                $_POST['dbrootpass'][$c]
+            );
+        }
+
         $c++;
     }
 
@@ -182,9 +186,9 @@ $_SESSION[$_POST['wished_name']]['lang'] = $lang;//browserLang(array('de','en'),
 // create some links
 $html .= '<form id="frm">
 <fieldset><legend>(4) "'.$_POST['wished_name'].'" '.L('created').'</legend>
-<a target="_blank" href="../database_adminer/index.php?project='.$_POST['wished_name'].'">'.L('goto_DB_Admin').' &rArr;</a>
-<hr />
-<a href="../../index.php?project='.$_POST['wished_name'].'">'.L('goto_Login_Page').' &rArr;</a>
+<!--<a target="_blank" href="../database_adminer/index.php?project='.$_POST['wished_name'].'">'.L('goto_DB_Admin').' &rArr;</a>
+<hr />-->
+<a id="goto_login_page" href="../../index.php?project='.$_POST['wished_name'].'">'.L('goto_Login_Page').'</a>
 <hr />
 <pre>'.$error.'</pre>';
 

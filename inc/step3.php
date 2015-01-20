@@ -24,38 +24,44 @@ foreach($pdoDrivers as $d)
 $html .= '</select>
 	'.hlp('dbtype', false).'
 
+<div id="divDbexists[[x]]" style="display:none">'.hlp('dbexists').'
+	<label for="dbalias[x]">'.L('DB_already_exists').'</label>
+	<input id="dbalias[[x]]" name="dbexists[x]" type="checkbox"  value="1" />
+	&nbsp;<b>'.L('DB_already_exists').'</b>
+</div>
+
 <div id="divDbalias[[x]]" style="display:none">'.hlp('dbalias').'
-	<label for="dbalias[x]">'.L('DB_Alias').'</label>
-	<input id="dbalias[[x]]" name="dbalias[x]" type="text" title="'.L('DB_Alias').'" placeholder="'.L('DB_Alias').'" value="'.L('Database').' [[x]]" />
+	<label for="dbalias[x]">'.L('DB_Alias').'*</label>
+	<input id="dbalias[[x]]" name="dbalias[x]" type="text" title="'.L('DB_Alias').'" placeholder="'.L('DB_Alias').'*" value="'.L('Database').' [[x]]" />
 </div>
 
 <div id="divDbname[[x]]" style="display:none">'.hlp('dbname').'
 	<span class="fr" id="putDbname[[x]]" title="'.L('generate_a_random_name').'" style="display:none" onclick="randomString(20,\'dbname[[x]]\',\'.db\')">&lArr;</span>
-	<label for="dbname[x]">'.L('DB_Name').'</label>
-	<input id="dbname[[x]]" name="dbname[x]" type="text" placeholder="'.L('DB_Name').'" />
+	<label for="dbname[x]">'.L('DB_Name').'*</label>
+	<input id="dbname[[x]]" name="dbname[x]" type="text" placeholder="'.L('DB_Name').'*" />
 </div>
 
 <div id="divDbpass[[x]]" style="display:none">'.hlp('dbpass').'
 	<span class="fr" id="putDbpass[[x]]" title="'.L('generate_a_random_password').'" style="display:none" onclick="randomString(20,\'dbpass[[x]]\',\'\')">&lArr;</span>
-	<label for="dbpass[x]">'.L('DB_Password').'</label>
-	<input id="dbpass[[x]]" name="dbpass[x]" type="text" placeholder="'.L('DB_Password').'" />
+	<label for="dbpass[x]">'.L('DB_Password').'*</label>
+	<input id="dbpass[[x]]" name="dbpass[x]" type="text" placeholder="'.L('DB_Password').'*" />
 </div>
 
 <div id="divDbuser[[x]]" style="display:none">'.hlp('dbuser').'
-	<label for="dbuser[x]">'.L('DB_Username').'</label>
-	<input id="dbuser[[x]]" name="dbuser[x]" type="text" placeholder="'.L('DB_Username').'" />
+	<label for="dbuser[x]">'.L('DB_Username').'*</label>
+	<input id="dbuser[[x]]" name="dbuser[x]" type="text" placeholder="'.L('DB_Username').'*" />
 </div>
 
 <div id="divDbhost[[x]]" style="display:none">'.hlp('dbhost').' 
 	<span class="fr" id="putDbhost[[x]]" title="'.L('generate_localhost').'" style="display:none" onclick="$(\'#dbhost[[x]]\').val(\'localhost\')">&lArr;</span>
-	<label for="dbhost[x]">'.L('DB_Host').'</label>
-	<input id="dbhost[[x]]" name="dbhost[x]" type="text" placeholder="'.L('DB_Host').'" /> 
+	<label for="dbhost[x]">'.L('DB_Host').'*</label>
+	<input id="dbhost[[x]]" name="dbhost[x]" type="text" placeholder="'.L('DB_Host').'*" />
 </div>
 	
 <div id="divDbport[[x]]" style="display:none">'.hlp('dbport').' 
 	<span class="fr" id="putDbport[[x]]" title="'.L('generate_port_3306').'" style="display:none" onclick="$(\'#dbport[[x]]\').val(\'3306\')">&lArr;</span>
-	<label for="dbport[x]">'.L('DB_Port').'</label>
-	<input id="dbport[[x]]" name="dbport[x]" type="text" placeholder="'.L('DB_Port').'" />
+	<label for="dbport[x]">'.L('DB_Port').'*</label>
+	<input id="dbport[[x]]" name="dbport[x]" type="text" placeholder="'.L('DB_Port').'*" />
 </div>
 
 <div id="divDbrootname[[x]]" style="display:none">'.hlp('dbuser').'

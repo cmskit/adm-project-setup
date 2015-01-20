@@ -15,15 +15,51 @@ function cloneFields()
  * @param el
  * @param i
  */
-function toggleFields(el, i)
+function toggleFields(el, index)
 {
-	var d = [false,false,false,false,false,false,false,false,false,false,false,false,false,false];
-	if(el.value=='mysql') d = [true,true,false,true,false,true,true,true,true,true,true,true,false,false];// show if MySql
-	if(el.value=='sqlite') d = [true,true,true,true,true,false,false,false,false,false,false,false,false,false];// show if SQLite
+	var d = {};
+	//if(el.value=='mysql') d = [true,true,false,true,false,true,true,true,true,true,true,true,false,false];// show if MySql
+	//if(el.value=='sqlite') d = [true,true,true,true,true,false,false,false,false,false,false,false,false,false];// show if SQLite
+
+	var container = ['divDbexists','divDbalias','divDbname','putDbname','divDbpass','putDbpass','divDbhost','putDbhost','divDbport','putDbport','divDbuser','divDbrootpass'];
+	//alert(el.value)
+	var v = {};
+	switch(el.value) {
+		case 'mysql':
+			v = {
+				divDbexists: true,
+				divDbalias: true,
+				divDbname: true,
+				divDbpass: true,
+				divDbhost: true,
+				putDbhost: true,
+				divDbport: true,
+				putDbport: true,
+				divDbuser: true,
+				divDbrootpass: true
+			};
+		break;
+		case 'sqlite':
+			v = {
+				divDbexists: true,
+				divDbalias: true,
+				divDbname: true,
+				putDbname: true,
+				divDbpass: true,
+				putDbpass: true
+			};
+		break;
+
+	}
 
 	// toggle
-	$('#divDbalias'+i).toggle(d[0]);
+	for(var i= 0,j=container.length; i<j; ++i) {
+		$('#'+container[i]+index).toggle(v[container[i]]==true);
+	}
 
+
+
+/*
 	$('#divDbname'+i).toggle(d[1]);
 	$('#putDbname'+i).toggle(d[2]);//random db name
 
@@ -40,7 +76,7 @@ function toggleFields(el, i)
 
 	$('#divDbrootname'+i).toggle(d[10]);
 	$('#divDbrootpass'+i).toggle(d[11]);
-
+*/
 }
 
 // put a random string into some fields
